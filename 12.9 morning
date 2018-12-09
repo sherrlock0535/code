@@ -1,0 +1,51 @@
+#include<iostream>
+#include<cstring>
+#include<cstdio>
+#define maxn 1000005
+using namespace std;
+inline void read(int &x){
+	x=0;int f=1;char ch=getchar();
+	while(ch<'0'||ch>'9'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	x*=f;
+}
+int N;
+int arr[maxn],sum[maxn];
+int find_nex(int x,int i){
+	int l=x,r=N,mid;
+	while(l<=r){
+		mid=l+r>>1;
+		if(sum[mid]-sum[x]==sum[i])
+			return mid;
+		if(sum[mid]-sum[x]<sum[i])
+			l=mid+1;
+		else
+			r=mid-1;
+	}
+	return -1;
+}
+int main(){
+	read(N);
+	for(int i=1;i<=N;i++){
+		read(arr[i]);
+		sum[i]=sum[i-1]+arr[i];
+	}
+	for(int i=1;i<=N;i++){
+		if(sum[N]%sum[i])
+			continue ;
+		int x=0;
+		int j=i;
+		int step=0;
+		while(j<=N){
+			j=find_nex(j,i);
+			step++;
+			if(j==-1)
+				break;
+			if(j==N){
+				printf("%d",step+1);
+				return 0;
+			}
+		}
+	}
+	printf("1");
+}
