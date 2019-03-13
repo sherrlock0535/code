@@ -1,0 +1,41 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<cstdlib>
+#include<cmath>
+#include<map>
+#define maxn 1000006
+using namespace std;
+double x[maxn],pjs,bjc;
+int num;
+int tim[maxn],top;
+map <double,int> mp;
+bool first[maxn];
+int main()
+{
+	cout<<"TOOLS OF STATISTICS，it could help solve your frustrating Math problems"<<endl<<endl;
+	cout<<"Declaration：This program coded by sherrlock."<<endl<<endl;
+	cout<<"My English is poor,but ASICLL limits the language.So I have to use F**King English.The program is used for commiunication of learning and taunt to my F**King roommate luv_letter.It\'s OK to spread this program."<<endl<<endl;
+	cout<<"INPUT : Just type the numbers and apart them by blank space.Input can be end up by a single character which is non-digit."<<endl;
+	cout<<"INPUT EXAMPLE：1 2 3 5.5 6.6 3.1415926 ."<<endl; 
+	while(cin>>x[++num]);
+	num--;
+	for(int i=1;i<=num;i++)
+	{
+		pjs+=x[i];
+		if(mp.find(x[i])==mp.end())
+			mp[x[i]]=++top,first[i]=1;
+		tim[mp[x[i]]]++; 
+	} 
+	pjs/=num;
+	cout<<endl<<"Average： "<<pjs<<endl<<endl;
+	for(int i=1;i<=num;i++)
+		bjc+=abs(x[i]-pjs)*abs(x[i]-pjs);
+	cout<<"Standard deviation: "<<sqrt(bjc)<<endl<<endl;
+	cout<<"Sariance: "<<bjc<<endl<<endl;
+	cout<<"Number    Time   Frequency"<<endl<<endl;
+	for(int i=1;i<=num;i++)
+		if(first[i]==1)
+			cout<<x[i]<<"         "<<tim[mp[x[i]]]<<"         "<<double(tim[mp[x[i]]])/num<<endl;
+	system("pause");
+}
